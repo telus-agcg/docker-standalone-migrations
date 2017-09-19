@@ -15,14 +15,14 @@ docker run \
 
 **Bonus**: To simplify things you can add a simple service to your `docker-compose.yml`
 
-```sh
+```yaml
 version: '3.3'
 
 services:
   rake:
     image: technekes:standalone-migrations
     volumes:
-      - .:/usr/src/app
+      - ./db:/usr/src/app/db
     links:
       - db
     environment:
@@ -40,3 +40,33 @@ rake app:update                      # Update configs and some other initially g
 rake db:create                       # Creates the database from DATABASE_URL or config/database.yml ...
 ...
 ```
+
+## SQLMigrationHelper
+
+This project includes a module that simplifies creating pure SQL migrations rather than the traditional model backed migrations. To take advantage of this feature include the module in a migration file:
+
+```ruby
+class CreateFooBars < ActiveRecord::Migration[5.1]
+  include SQLMigrationHelper
+end
+```
+
+Then add a file that matches the name of the migration at `./db/migrate/sql/`:
+
+```sql
+// ./db/migrate/sql/create_foo_bars.sql
+--# :down
+DROP TABLE IF EXISTS public.foo_bars;
+--#
+
+--# :up
+CREATE TABLE public.foo_bars
+(
+   id            text NOT NULL
+  ,key           text NOT NULL
+  ,name          text NOT NULL
+);
+--#
+```
+
+Notice the tokens that divide the script into `up` and `down` sections, these are required for the module to function.

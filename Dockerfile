@@ -15,9 +15,7 @@ RUN \
 
 WORKDIR /usr/src/app
 
-RUN \
-  echo \
-    "require 'standalone_migrations'; StandaloneMigrations::Tasks.load_tasks" \
-    >> Rakefile
+COPY Rakefile Rakefile
+COPY lib lib
 
 ENTRYPOINT ["rake"]
