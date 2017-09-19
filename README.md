@@ -54,7 +54,8 @@ end
 Then add a file that matches the name of the migration at `./db/migrate/sql/`:
 
 ```sql
-// ./db/migrate/sql/create_foo_bars.sql
+/* ./db/migrate/sql/create_foo_bars.sql */
+
 --# :down
 DROP TABLE IF EXISTS public.foo_bars;
 --#
