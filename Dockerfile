@@ -6,6 +6,8 @@ RUN \
     libxml2-dev \
     libxslt-dev \
     postgresql-dev && \
+  apk --no-cache add \
+    postgresql-client && \
   gem install pg && \
   gem install nokogiri -- --use-system-libraries && \
   gem install standalone_migrations && \
