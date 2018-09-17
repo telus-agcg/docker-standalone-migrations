@@ -41,6 +41,15 @@ rake db:create                       # Creates the database from DATABASE_URL or
 ...
 ```
 
+## Multi-database support
+
+The `standalone_migrations` gem supports migrating multiple databases, see:
+https://www.rubydoc.info/gems/standalone_migrations/5.2.6#Multiple_database_support
+
+To use this feature, add your `.database_name.standalone_migrations` config files
+to this directory: `db/config`  
+Configuration there will be copied `ONBUILD` so that the gem can find them at runtime.
+
 ## SQLMigrationHelper
 
 This project includes a module that simplifies creating pure SQL migrations rather than the traditional model backed migrations. To take advantage of this feature include the module in a migration file:

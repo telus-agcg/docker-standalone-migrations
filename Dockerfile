@@ -1,6 +1,7 @@
 FROM ruby:alpine
 
 ONBUILD COPY db/ /usr/src/app/db/
+ONBUILD COPY db/config/ /usr/src/app
 
 RUN \
   apk --no-cache add --virtual build_deps \
